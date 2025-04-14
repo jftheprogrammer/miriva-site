@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Adjust path for GitHub Pages (modify based on your repo name and structure)
-    const contentPath = '/miriva-website/content.json'; // Change 'miriva-website' to your repo name
+    const contentPath = '/miriva-site/content.json'; // Change 'miriva-website' to your repo name
 
     // Handle icon image loading to prevent flickering
     document.querySelectorAll('.icon-img').forEach(img => {
