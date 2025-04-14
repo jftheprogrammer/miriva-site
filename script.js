@@ -1,7 +1,36 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Adjust path for GitHub Pages (modify based on your repo name and structure)
+    const contentPath = '/miriva-website/content.json'; // Change 'miriva-website' to your repo name
 
-    const contentPath = '/miriva-site/content.json'; 
+    // Handle icon image loading to prevent flickering
+    document.querySelectorAll('.icon-img').forEach(img => {
+        const icon = img.closest('.icon');
+        const iconName = icon.dataset.icon || img.alt;
 
+        // Initially hide the image to prevent flicker
+        img.style.opacity = '0';
+
+        // Create a new Image object to preload
+        const preloadImg = new Image();
+        preloadImg.src = img.src;
+
+        preloadImg.onload = () => {
+            console.log(`Icon loaded successfully: ${iconName}`);
+            img.src = preloadImg.src;
+            img.style.opacity = '1';
+            img.dataset.loaded = 'true';
+        };
+
+        preloadImg.onerror = () => {
+            console.error(`Failed to load icon: ${iconName}, falling back to local image`);
+            // Use a local fallback image (you'll need to add this to your repo)
+            img.src = 'images2/fallback-icon.png'; // Add a small 32x32 PNG to your images2/ folder
+            img.style.opacity = '1';
+            img.dataset.loaded = 'true';
+        };
+    });
+
+    // Load content
     fetch(contentPath)
         .then(response => {
             if (!response.ok) {
@@ -19,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('recycle-bin-content').innerHTML = data.recycleBin;
             document.getElementById('my-computer-content').innerHTML = data.myComputer;
 
-     
+            // Initialize gallery lightbox
             document.querySelectorAll('.gallery-images img').forEach(img => {
                 img.style.cursor = 'pointer';
                 img.onclick = () => {
@@ -28,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
             });
 
-     
+            // Open welcome message
             setTimeout(() => openWindow('iloveyou'), 1000);
         })
         .catch(error => {
@@ -38,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-  
+    // Live clock
     function updateClock() {
         const now = new Date();
         const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -47,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updateClock();
     setInterval(updateClock, 1000);
 
-
+    // Background music
     const bgMusic = document.getElementById('bg-music');
     bgMusic.volume = 0.2;
     let isMusicPlaying = false;
@@ -62,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
         isMusicPlaying = !isMusicPlaying;
     };
 
-
+    // Window management
     let maxZIndex = 100;
     const taskbarWindows = document.getElementById('taskbar-windows');
 
@@ -174,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-
+    // Debounce taskbar updates to prevent flicker
     let taskbarTimeout;
     function debouncedUpdateTaskbar() {
         clearTimeout(taskbarTimeout);
@@ -201,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-
+    // Close start menu when clicking outside
     document.addEventListener('click', function(e) {
         const startMenu = document.getElementById('startMenu');
         const startButton = document.querySelector('.start-button');
