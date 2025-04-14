@@ -1,13 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Adjust path for GitHub Pages (modify based on your repo name and structure)
-    const contentPath = '/miriva-site/content.json'; // Change 'miriva-website' to your repo name
 
-    // Handle icon image loading to prevent flickering
+    const contentPath = '/miriva-site/content.json'; 
+    
     document.querySelectorAll('.icon-img').forEach(img => {
         const icon = img.closest('.icon');
         const iconName = icon.dataset.icon || img.alt;
 
-        // Initially hide the image to prevent flicker
+        
         img.style.opacity = '0';
 
         // Create a new Image object to preload
@@ -23,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         preloadImg.onerror = () => {
             console.error(`Failed to load icon: ${iconName}, falling back to local image`);
-            // Use a local fallback image (you'll need to add this to your repo)
-            img.src = 'images2/fallback-icon.png'; // Add a small 32x32 PNG to your images2/ folder
+
+            img.src = 'images2/fallback-icon.png';
             img.style.opacity = '1';
             img.dataset.loaded = 'true';
         };
