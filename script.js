@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Load content
-    fetch('content.json')
+
+    const contentPath = '/miriva-site/content.json'; 
+
+    fetch(contentPath)
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Failed to load content.json: ${response.statusText}`);
+                throw new Error(`Failed to load content.json: ${response.status} ${response.statusText}`);
             }
             return response.json();
         })
@@ -17,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('recycle-bin-content').innerHTML = data.recycleBin;
             document.getElementById('my-computer-content').innerHTML = data.myComputer;
 
-            // Initialize gallery lightbox
+     
             document.querySelectorAll('.gallery-images img').forEach(img => {
                 img.style.cursor = 'pointer';
                 img.onclick = () => {
@@ -26,17 +28,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
             });
 
-            // Open welcome message
+     
             setTimeout(() => openWindow('iloveyou'), 1000);
         })
         .catch(error => {
-            console.error('Error loading content:', error);
+            console.error('Error loading content:', error.message);
             document.querySelectorAll('.window-content').forEach(content => {
-                content.innerHTML = '<p style="color: red;">Error loading content. Please try again later.</p>';
+                content.innerHTML = `<p style="color: red;">Error loading content: ${error.message}. Please check the console for details.</p>`;
             });
         });
 
-    // Live clock
+  
     function updateClock() {
         const now = new Date();
         const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -45,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updateClock();
     setInterval(updateClock, 1000);
 
-    // Background music
+
     const bgMusic = document.getElementById('bg-music');
     bgMusic.volume = 0.2;
     let isMusicPlaying = false;
@@ -60,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
         isMusicPlaying = !isMusicPlaying;
     };
 
-    // Window management
+
     let maxZIndex = 100;
     const taskbarWindows = document.getElementById('taskbar-windows');
 
@@ -172,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Debounce taskbar updates to prevent flicker
+
     let taskbarTimeout;
     function debouncedUpdateTaskbar() {
         clearTimeout(taskbarTimeout);
@@ -199,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Close start menu when clicking outside
+
     document.addEventListener('click', function(e) {
         const startMenu = document.getElementById('startMenu');
         const startButton = document.querySelector('.start-button');
