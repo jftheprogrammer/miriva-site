@@ -1,0 +1,383 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma, Arial, sans-serif;
+    background: url('images2/desktop-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    overflow: hidden;
+    color: #000;
+}
+
+/* Desktop */
+.desktop {
+    height: calc(100vh - 30px);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Icon styles to prevent flickering */
+.icon {
+    width: 80px;
+    text-align: center;
+    margin: 10px;
+    cursor: pointer;
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+    will-change: none; /* Prevent animation assumptions */
+}
+.icon img {
+    width: 32px;
+    height: 32px;
+    display: block; /* Prevent layout shifts */
+    image-rendering: pixelated; /* Retro look, stable rendering */
+    backface-visibility: hidden; /* Avoid transform flicker */
+}
+.icon span {
+    display: block;
+    font-size: 11px;
+    margin-top: 5px;
+    line-height: 1.2;
+    word-wrap: break-word;
+}
+.icon:hover {
+    background: rgba(255, 255, 255, 0.2); /* Explicit hover to prevent glitches */
+}
+
+/* Window */
+.window {
+    display: none;
+    position: absolute;
+    border: 1px solid #000;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    min-width: 300px;
+    min-height: 200px;
+    max-width: 80%;
+    max-height: 80%;
+    overflow: hidden;
+    resize: both;
+    background: #fff;
+    transition: opacity 0.3s, transform 0.3s;
+}
+.window.window-open {
+    opacity: 1;
+    transform: scale(1);
+}
+.window.window-close {
+    opacity: 0;
+    transform: scale(0.8);
+}
+.window-header {
+    background: linear-gradient(to right, #000080, #1084d0);
+    color: #fff;
+    padding: 2px 5px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: move;
+    border-bottom: 1px solid #000;
+}
+.window-header span {
+    font-weight: bold;
+}
+.window-buttons {
+    display: flex;
+    gap: 2px;
+}
+.window-buttons button {
+    width: 16px;
+    height: 14px;
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+    background: #c0c0c0;
+    border: 1px outset #fff;
+    border-color: #fff #808080 #808080 #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.window-buttons button.close {
+    background: #c00000;
+    color: #fff;
+}
+.window-content {
+    padding: 10px;
+    font-size: 12px;
+    background: url('images2/background.gif') no-repeat center center;
+    background-size: cover;
+    min-height: calc(100% - 20px);
+    box-sizing: border-box;
+    overflow-y: auto;
+    position: relative;
+}
+.window-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 1;
+    pointer-events: none; /* Prevent interference with icons */
+}
+.window-content > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Taskbar */
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(to right, #000080, #1084d0);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.3);
+    border-top: 1px solid #000;
+}
+.start-button {
+    background: #c0c0c0;
+    border: 1px outset #fff;
+    border-color: #fff #808080 #808080 #fff;
+    padding: 2px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+.start-button::before {
+    content: url('images2/start-icon.png');
+    margin-right: 5px;
+}
+.taskbar-windows {
+    display: flex;
+    gap: 5px;
+    margin-left: 10px;
+}
+.taskbar-window {
+    background: #c0c0c0;
+    border: 1px inset #fff;
+    padding: 2px 10px;
+    font-size: 11px;
+    cursor: pointer;
+}
+.taskbar-right {
+    margin-left: auto;
+    font-size: 12px;
+    background: #c0c0c0;
+    color: #000;
+    padding: 2px 5px;
+    border: 1px inset #fff;
+}
+
+/* Start Menu */
+.start-menu {
+    display: none;
+    position: absolute;
+    bottom: 30px;
+    left: 5px;
+    width: 200px;
+    background: #c0c0c0;
+    border: 1px outset #fff;
+    border-color: #fff #808080 #808080 #fff;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+.start-menu-header {
+    background: linear-gradient(to bottom, #000080, #1084d0);
+    color: #fff;
+    padding: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid #000;
+    transform: rotate(-90deg);
+    position: absolute;
+    left: -40px;
+    top: 80px;
+    width: 150px;
+    text-align: center;
+}
+.start-menu-items {
+    margin-left: 30px;
+    padding: 5px 0;
+}
+.start-menu-item {
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.start-menu-item:hover {
+    background: #000080;
+    color: #fff;
+}
+.start-menu-item::after {
+    content: '>';
+    margin-left: auto;
+}
+
+/* Theme-Specific Styles */
+.window[data-theme="default"] .window-content {
+    color: #000;
+}
+.window[data-theme="notepad"] .window-content {
+    color: #000;
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+    padding: 20px;
+}
+.window[data-theme="explorer"] .window-content {
+    color: #000;
+}
+
+/* Media Styles */
+#riva-content video {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 0 auto;
+}
+#us-content img {
+    max-width: 100%;
+    max-height: 80%;
+    display: block;
+    margin: 0 auto;
+}
+#moao-content audio {
+    width: 100%;
+    max-width: 300px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* File Explorer Styles */
+.explorer-content h2 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+.explorer-content ul {
+    list-style: none;
+    padding: 0;
+}
+.explorer-content ul li {
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+}
+.explorer-content ul li::before {
+    content: url('images2/file-icon.png');
+    margin-right: 10px;
+}
+.explorer-content .gallery-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.explorer-content .gallery-images img {
+    max-width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.explorer-content .drives {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.explorer-content .drive {
+    width: 100px;
+    text-align: center;
+}
+.explorer-content .drive img {
+    width: 48px;
+    height: 48px;
+}
+.explorer-content .drive span {
+    display: block;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+/* Music Toggle */
+.music-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+.music-toggle button {
+    background: #c0c0c0;
+    border: 1px outset #fff;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Mobile Support */
+@media (max-width: 600px) {
+    .desktop {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 5px;
+    }
+    .icon {
+        width: 60px;
+        margin: 5px;
+    }
+    .window {
+        min-width: 90vw !important;
+        max-width: 95vw !important;
+        min-height: 50vh !important;
+        max-height: 80vh !important;
+        left: 2.5vw !important;
+        top: 10px !important;
+        resize: none !important;
+    }
+    .window-content {
+        font-size: 10px;
+    }
+    .taskbar {
+        height: 25px;
+        font-size: 10px;
+    }
+    .start-button {
+        padding: 2px 5px;
+    }
+    .taskbar-window {
+        padding: 2px 5px;
+        font-size: 9px;
+    }
+    .start-menu {
+        width: 150px;
+        bottom: 25px;
+    }
+    .start-menu-header {
+        left: -30px;
+        top: 60px;
+        width: 100px;
+    }
+    .explorer-content .gallery-images img {
+        max-width: 100px;
+    }
+    #riva-content video,
+    #us-content img,
+    #moao-content audio {
+        max-width: 100%;
+    }
+    .music-toggle button {
+        padding: 3px;
+        font-size: 12px;
+    }
+}

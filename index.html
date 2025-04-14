@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Miriva 💕</title>
+    <link rel="icon" href="images2/heart.png">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Preload icons to prevent flickering -->
+    <link rel="preload" href="images2/video-icon.jpg" as="image">
+    <link rel="preload" href="images2/audio-icon.png" as="image">
+    <link rel="preload" href="images2/txt.png" as="image">
+    <link rel="preload" href="images2/folder.jpg" as="image">
+    <link rel="preload" href="images2/image-icon.png" as="image">
+    <link rel="preload" href="images2/recyclebin.jpg" as="image">
+    <link rel="preload" href="images2/my-pc.png" as="image">
+    <script src="mp3-player/mp3-player.js" defer></script>
+    <script src="script.js" defer></script>
+    <!-- Cache assets for faster local loading -->
+    <?php
+        header("Cache-Control: public, max-age=3600");
+    ?>
+</head>
+<body>
+    <!-- Desktop -->
+    <div class="desktop">
+        <div class="icon" onclick="openWindow('riva')">
+            <img src="images2/video-icon.jpg" alt="Video Icon" onerror="this.src='https://via.placeholder.com/32?text=Video'">
+            <span>riva.mp4</span>
+        </div>
+        <div class="icon" onclick="openWindow('moao')">
+            <img src="images2/audio-icon.png" alt="Audio Icon" onerror="this.src='https://via.placeholder.com/32?text=Audio'">
+            <span>moao.mp3</span>
+        </div>
+        <div class="icon" onclick="openWindow('iloveyou')">
+            <img src="images2/txt.png" alt="Text Icon" onerror="this.src='https://via.placeholder.com/32?text=Text'">
+            <span>iloveyou.txt</span>
+        </div>
+        <div class="icon" onclick="openWindow('poem')">
+            <img src="images2/txt.png" alt="Text Icon" onerror="this.src='https://via.placeholder.com/32?text=Text'">
+            <span>poem.txt</span>
+        </div>
+        <div class="icon" onclick="openWindow('gallery')">
+            <img src="images2/folder.jpg" alt="Folder Icon" onerror="this.src='https://via.placeholder.com/32?text=Folder'">
+            <span>gallery</span>
+        </div>
+        <div class="icon" onclick="openWindow('us')">
+            <img src="images2/image-icon.png" alt="Image Icon" onerror="this.src='https://via.placeholder.com/32?text=Image'">
+            <span>us.png</span>
+        </div>
+        <div class="icon" onclick="openWindow('recycle-bin')">
+            <img src="images2/recyclebin.jpg" alt="Recycle Bin Icon" onerror="this.src='https://via.placeholder.com/32?text=Recycle'">
+            <span>Recycle Bin</span>
+        </div>
+        <div class="icon" onclick="openWindow('my-computer')">
+            <img src="images2/my-pc.png" alt="My Computer Icon" onerror="this.src='https://via.placeholder.com/32?text=Computer'">
+            <span>My Computer</span>
+        </div>
+    </div>
+
+    <!-- Windows -->
+    <div id="riva" class="window" data-theme="default" aria-label="Video Player">
+        <div class="window-header">
+            <span>riva.mp4</span>
+            <div class="window-buttons">
+                <button onclick="minimizeWindow('riva')" aria-label="Minimize">-</button>
+                <button onclick="maximizeWindow('riva')" aria-label="Maximize">□</button>
+                <button class="close" onclick="closeWindow('riva')" aria-label="Close">X</button>
+            </div>
+        </div>
+        <div class="window-content" id="riva-content"></div>
+    </div>
+
+    <div id="moao" class="window" data-theme="default" aria-label="Music Player">
+        <div class="window-header">
+            <span>moao.mp3</span>
+            <div class="window-buttons">
+                <button onclick="minimizeWindow('moao')" aria-label="Minimize">-</button>
+                <button onclick="maximizeWindow('moao')" aria-label="Maximize">□</button>
+                <button class="close" onclick="closeWindow('moao')" aria-label="Close">X</button>
+            </div>
+        </div>
+        <div class="window-content" id="moao-content"><p>Loading music player...</p></div>
+    </div>
+
+    <div id="iloveyou" class="window" data-theme="notepad" aria-label="Love Letter">
+        <div class="window-header">
+            <span>iloveyou.txt - Notepad</span>
+            <div class="window-buttons">
+                <button onclick="minimizeWindow('iloveyou')" aria-label="Minimize">-</button>
+                <button onclick="maximizeWindow('iloveyou')" aria-label="Maximize">□</button>
+                <button class="close" onclick="closeWindow('iloveyou')" aria-label="Close">X</button>
+            </div>
+        </div>
+        <div class="window-content" id="iloveyou-content"></div>
+    </div>
+
+    <div id="poem" class="window" data-theme="notepad" aria-label="Poem">
+        <div class="window-header">
+            <span>poem.txt - Notepad</span>
+            <div class="window-buttons">
+                <button onclick="minimizeWindow('poem')" aria-label="Minimize">-</button>
+                <button onclick="maximizeWindow('poem')" aria-label="Maximize">□</button>
+                <button class="close" onclick="closeWindow('poem')" aria-label="Close">X</button>
+            </div>
+        </div>
+        <div class="window-content" id="poem-content"></div>
+    </div>
+
+    <div id="gallery" class="window" data-theme="explorer" aria-label="Photo Gallery">
+        <div class="window-header">
+            <span>gallery</span>
+            <div class="window-buttons">
+                <button onclick="minimizeWindow('gallery')" aria-label="Minimize">-</button>
+                <button onclick="maximizeWindow('gallery')" aria-label="Maximize">□</button>
+                <button class="close" onclick="closeWindow('gallery')" aria-label="Close">X</button>
+            </div>
+        </div>
+        <div class="window-content" id="gallery-content"></div>
+    </div>
+
+    <div id="us" class="window" data-theme="default" aria-label="Image Viewer">
+        <div class="window-header">
+            <span>us.png</span>
+            <div class="window-buttons">
+                <button onclick="minimizeWindow('us')" aria-label="Minimize">-</button>
+                <button onclick="maximizeWindow('us')" aria-label="Maximize">□</button>
+                <button class="close" onclick="closeWindow('us')" aria-label="Close">X</button>
+            </div>
+        </div>
+        <div class="window-content" id="us-content"></div>
+    </div>
+
+    <div id="recycle-bin" class="window" data-theme="explorer" aria-label="Recycle Bin">
+        <div class="window-header">
+            <span>Recycle Bin</span>
+            <div class="window-buttons">
+                <button onclick="minimizeWindow('recycle-bin')" aria-label="Minimize">-</button>
+                <button onclick="maximizeWindow('recycle-bin')" aria-label="Maximize">□</button>
+                <button class="close" onclick="closeWindow('recycle-bin')" aria-label="Close">X</button>
+            </div>
+        </div>
+        <div class="window-content" id="recycle-bin-content"></div>
+    </div>
+
+    <div id="my-computer" class="window" data-theme="explorer" aria-label="My Computer">
+        <div class="window-header">
+            <span>My Computer</span>
+            <div class="window-buttons">
+                <button onclick="minimizeWindow('my-computer')" aria-label="Minimize">-</button>
+                <button onclick="maximizeWindow('my-computer')" aria-label="Maximize">□</button>
+                <button class="close" onclick="closeWindow('my-computer')" aria-label="Close">X</button>
+            </div>
+        </div>
+        <div class="window-content" id="my-computer-content"></div>
+    </div>
+
+    <!-- Taskbar -->
+    <div class="taskbar">
+        <button class="start-button" onclick="toggleStartMenu()" aria-label="Start Menu">Start</button>
+        <div class="taskbar-windows" id="taskbar-windows"></div>
+        <div class="start-menu" id="startMenu">
+            <div class="start-menu-header">
+                <span>Windows95</span>
+            </div>
+            <div class="start-menu-items">
+                <div class="start-menu-item" onclick="openWindow('riva')">Play Video</div>
+                <div class="start-menu-item" onclick="openWindow('moao')">Listen to Music</div>
+                <div class="start-menu-item" onclick="openWindow('gallery')">View Gallery</div>
+                <div class="start-menu-item" onclick="openWindow('iloveyou')">Read Letter</div>
+                <div class="start-menu-item" onclick="openWindow('poem')">Read Poem</div>
+                <div class="start-menu-item" onclick="alert('Help is on the way!')">Help</div>
+                <div class="start-menu-item" onclick="closeAllWindows()">Shut Down...</div>
+            </div>
+        </div>
+        <div class="taskbar-right" id="clock"></div>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+        <source src="music/background.mp3" type="audio/mpeg">
+    </audio>
+    <div class="music-toggle">
+        <button onclick="toggleMusic()" id="music-toggle" aria-label="Toggle Background Music">🎵</button>
+    </div>
+</body>
+</html>
