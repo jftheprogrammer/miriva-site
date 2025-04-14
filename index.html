@@ -28,60 +28,6 @@
         <div class="icon" onclick="openWindow('moao')">
             <img src="images2/audio-icon.png" alt="Audio Icon" onerror="this.src='https://via.placeholder.com/32?text=Audio'">
             <span>moao.mp3</span>
-        “
-
-System: It looks like the response was cut off while providing the full code for `index.html`. I’ll complete the code for all requested files (`index.html`, `content.json`, `script.js`, `styles.css`), ensuring the flickering icons issue is fixed and the site is optimized for GitHub Pages deployment. I’ll also include detailed instructions for deploying on GitHub Pages, preserving all features (welcome message, background music, gallery lightbox, etc.) and addressing your move from XAMPP to a static hosting environment.
-
-### Addressing Flickering Icons
-As previously analyzed, flickering icons are likely due to image loading delays, CSS rendering issues, or JavaScript repaints. The fixes include:
-- **Preloading Images**: `<link rel="preload">` ensures icons load before rendering.
-- **Stable CSS**: `.icon img` uses `display: block`, fixed `width`/`height`, `image-rendering: pixelated`, and `backface-visibility: hidden` to prevent layout shifts or rendering glitches.
-- **Debounced JavaScript**: `updateTaskbar` is debounced to minimize DOM repaints.
-- **Explicit Hover**: `.icon:hover` prevents unintended effects.
-- **Rendering Optimization**: `will-change: none` on icons and `pointer-events: none` on overlays to isolate rendering.
-
-### GitHub Pages Considerations
-- **Static Site**: Replaced `index.php` with `index.html` since GitHub Pages doesn’t support PHP.
-- **Relative Paths**: All asset paths (`images2/`, `videos/`, `music/`, `mp3-player/`) are relative for portability.
-- **Caching**: Added `<meta http-equiv="Cache-Control">` for browser caching.
-- **Repo Structure**: Files are organized for GitHub Pages, with `index.html` at the root or in `/docs`.
-
-### Full Code
-
-#### `index.html`
-The main static page, replacing `index.php`.
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="public, max-age=3600">
-    <title>For Miriva 💕</title>
-    <link rel="icon" href="images2/heart.png">
-    <link rel="stylesheet" href="styles.css">
-    <!-- Preload icons to prevent flickering -->
-    <link rel="preload" href="images2/video-icon.jpg" as="image">
-    <link rel="preload" href="images2/audio-icon.png" as="image">
-    <link rel="preload" href="images2/txt.png" as="image">
-    <link rel="preload" href="images2/folder.jpg" as="image">
-    <link rel="preload" href="images2/image-icon.png" as="image">
-    <link rel="preload" href="images2/recyclebin.jpg" as="image">
-    <link rel="preload" href="images2/my-pc.png" as="image">
-    <script src="mp3-player/mp3-player.js" defer></script>
-    <script src="script.js" defer></script>
-</head>
-<body>
-    <!-- Desktop -->
-    <div class="desktop">
-        <div class="icon" onclick="openWindow('riva')">
-            <img src="images2/video-icon.jpg" alt="Video Icon" onerror="this.src='https://via.placeholder.com/32?text=Video'">
-            <span>riva.mp4</span>
-        </div>
-        <div class="icon" onclick="openWindow('moao')">
-            <img src="images2/audio-icon.png" alt="Audio Icon" onerror="this.src='https://via.placeholder.com/32?text=Audio'">
-            <span>moao.mp3</span>
         </div>
         <div class="icon" onclick="openWindow('iloveyou')">
             <img src="images2/txt.png" alt="Text Icon" onerror="this.src='https://via.placeholder.com/32?text=Text'">
