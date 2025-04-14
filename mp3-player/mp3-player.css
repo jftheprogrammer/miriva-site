@@ -1,0 +1,242 @@
+.mp3-player-container {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+.mp3-player-container .player-container {
+    display: flex;
+    border: 2px solid #666;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to bottom, #c0c0c0, #a0a0a0);
+}
+
+.mp3-player-container .controls-panel {
+    width: 200px;
+    padding: 10px;
+    border-right: 1px solid #999;
+}
+
+.mp3-player-container .controls-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.mp3-player-container .title {
+    font-weight: bold;
+}
+
+.mp3-player-container .sliders-container {
+    border: 1px inset #888;
+    background-color: #ddd;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.mp3-player-container .slider-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.mp3-player-container .slider-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #999;
+    border-radius: 3px;
+    background-color: #eee;
+    margin: 2px;
+    padding: 2px;
+    height: 20px;
+}
+
+.mp3-player-container .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    background: #d3d3d3;
+    outline: none;
+}
+
+.mp3-player-container .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    background:I #4c4c4c;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.mp3-player-container .features-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.mp3-player-container .feature-button {
+    border: 1px solid #888;
+    background-color: #ddd;
+    border-radius: 3px;
+    text-align: center;
+    padding: 3px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.mp3-player-container .feature-button:hover {
+    background-color: #ccc;
+}
+
+.mp3-player-container .auto-amp {
+    display: flex;
+    align-items: center;
+    border: 1px solid #999;
+    border-radius: 3px;
+    background-color: #eee;
+    padding: 5px;
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+.mp3-player-container .auto-amp input {
+    margin-right: 5px;
+}
+
+.mp3-player-container .display-panel {
+    width: 300px;
+    padding: 10px;
+    background: linear-gradient(to bottom, #6e84a1, #536b8b);
+}
+
+.mp3-player-container .player-header {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.mp3-player-container .player-title {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.mp3-player-container .window-controls {
+    display: flex;
+}
+
+.mp3-player-container .window-button {
+    width: 12px;
+    height: 12px;
+    border: 1px solid #444;
+    border-radius: 2px;
+    background-color: #888;
+    margin-left: 2px;
+    cursor: pointer;
+}
+
+.mp3-player-container .main-display {
+    background-color: #000057;
+    color: #00FFFF;
+    text-align: center;
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Courier New', monospace;
+}
+
+.mp3-player-container .song-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.mp3-player-container .time-display {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.mp3-player-container .file-info {
+    font-size: 12px;
+    color: #88CCFF;
+}
+
+.mp3-player-container .playback-controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.mp3-player-container .control-button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #444;
+    border-radius: 3px;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 3px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.mp3-player-container .control-button:hover {
+    background-color: #ccc;
+}
+
+.mp3-player-container .progress-bar {
+    background-color: #444;
+    height: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    position: relative;
+}
+
+.mp3-player-container .progress-fill {
+    background-color: #88CCFF;
+    height: 100%;
+    border-radius: 5px;
+    width: 0%;
+    transition: width 0.3s;
+}
+
+.mp3-player-container .progress-handle {
+    width: 12px;
+    height: 16px;
+    background-color: #ddd;
+    position: absolute;
+    top: -3px;
+    border-radius: 3px;
+    border: 1px solid #444;
+    transform: translateX(-6px);
+    cursor: pointer;
+}
+
+.mp3-player-container .visualizer {
+    width: 100%;
+    height: 40px;
+    background-color: #000057;
+    margin-top: 10px;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+
+.mp3-player-container .bar {
+    position: absolute;
+    bottom: 0;
+    background-color: #00FFFF;
+    width: 5px;
+    margin: 0 1px;
+}
