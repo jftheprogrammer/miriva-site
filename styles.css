@@ -27,13 +27,17 @@ body {
     color: #fff;
     text-shadow: 1px 1px 2px #000;
     will-change: none; /* Prevent animation assumptions */
+    position: relative; /* Isolate rendering */
+    isolation: isolate; /* Further isolate rendering context */
 }
-.icon img {
+.icon-img {
     width: 32px;
     height: 32px;
     display: block; /* Prevent layout shifts */
     image-rendering: pixelated; /* Retro look, stable rendering */
     backface-visibility: hidden; /* Avoid transform flicker */
+    transition: opacity 0.2s ease; /* Smooth opacity transition */
+    transform: translateZ(0); /* Force hardware acceleration */
 }
 .icon span {
     display: block;
@@ -60,6 +64,7 @@ body {
     resize: both;
     background: #fff;
     transition: opacity 0.3s, transform 0.3s;
+    isolation: isolate; /* Isolate window rendering */
 }
 .window.window-open {
     opacity: 1;
